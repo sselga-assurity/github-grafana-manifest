@@ -1,0 +1,29 @@
+---
+applications:
+  - name: dashboard-trends-grafana
+    memory: 512M
+    instances: 1
+    stack: cflinuxfs4
+    path: ./
+    routes:
+      - route: https://demo-grafana-trends.app.ap.assurity.cloud
+    buildpacks:
+      - https://github.com/Assurity-Cloud/cf-grafana-buildpack.git#v1.0.1
+    env:
+      HOME_DASHBOARD_UID: b20c867d5f
+      GF_DASHBOARDS_JSON_ENABLED: true
+      GF_DASHBOARDS_MIN_REFRESH_INTERVAL: 1m
+
+      GF_ANALYTICS_REPORTING_ENABLED: false
+      GF_EXPLORE_ENABLED: false
+      GF_METRICS_ENABLED: true
+      GF_SNAPSHOTS_EXTERNAL_ENABLED: false
+
+      GF_USERS_ALLOW_ORG_CREATE: false
+      GF_USERS_ALLOW_SIGN_UP: false
+      GF_USERS_AUTO_ASSIGN_ORG_ROLE: Viewer
+
+      GF_SECURITY_ADMIN_USER: demo
+      GF_SECURITY_ADMIN_PASSWORD: demo1234
+
+      GF_SECURITY_ALLOW_EMBEDDING: true
