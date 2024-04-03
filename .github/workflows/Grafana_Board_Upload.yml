@@ -11,6 +11,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install cf-cli
+
     - name: Set up Cloud Foundry CLI
       uses: cloudfoundry/cli-action@v2
       with:
