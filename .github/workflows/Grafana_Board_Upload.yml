@@ -18,10 +18,6 @@ jobs:
       - name: upload grafana board
         run: |
           cf api https://api.sys.ap.assurity.cloud
+
+      - name: upload grafana board 1
           cf login --sso
-          EAU56Xazwj
-          
-          # cd ./grafana-config/
-          # Authenticate with Cloud Foundry if necessary
-          # cf login -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
-          # cf push
