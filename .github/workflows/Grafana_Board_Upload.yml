@@ -11,21 +11,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Cloud Foundry CLI
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y apt-transport-https ca-certificates wget gnupg
-        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-        sudo apt-get update
-        sudo apt-get install -y cf-cli
+    - name: Set up Cloud Foundry CLI
+      uses: cloudfoundry/cli-action@v2
+      with:
+        cf_api: ${{ secrets.CF_API }}
+        cf_sso: true
+        cf_sso_passcode: ${{ secrets.CF_SSO_PASSCODE }}
         
     - name: Login to Cloud Foundry
-      run: |
-        cf api ${{ secrets.CF_API }}
-        cf auth seph.selga@assurity.co.nz ${{ secrets.CF_SSO_PASSWORD }}
-        cf target -o msd -s ctaas
+      run: cf login --sso
         
     - name: Deploy to Cloud Foundry
-      run: |
-        cf push
+      run: cf push -o msd -s ctaas
