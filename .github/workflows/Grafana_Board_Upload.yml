@@ -18,7 +18,7 @@ jobs:
 
       - name: Authenticate with Cloud Foundry
         run: |
-          cf api ${{ secrets.CF_API_ENDPOINT }}
+          cf api https://api.sys.ap.assurity.cloud
           cf login --sso
           # Here, you might need to capture and handle the temporary authentication code
           # You can use 'grep' or other text processing tools to extract it from the output
