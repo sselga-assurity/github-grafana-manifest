@@ -36,4 +36,4 @@ jobs:
       run: ls -la
 
     - name: Deploy to Cloud Foundry
-      run: cf push dashboard-trends-grafana -f manifest.yml
+      run: cf push dashboard-trends-grafana -f github-grafana-manifest/grafana-config/manifest.yml
