@@ -6,27 +6,24 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Cloud Foundry CLI
-      uses: elliottpope/cloudfoundry-cli-action@v2
-      with:
-        api: ${{ secrets.CF_API }}
-        organization: msd
-        space: ctaas
+      
+    - name: Install Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install cf-cli
+        
+    - name: Set up Cloud Foundry API endpoint
+      run: cf api ${{ secrets.CF_API }}
         
     - name: SSO Login
       run: |
-        cf login --sso
-
-    - name: Input SSO Temporary Code
-      run: |
-        echo "Please input the SSO temporary code provided by Cloud Foundry: "
-        read sso_temporary_code
         cf login --sso -c ${{ secrets.CF_SSO_PASSCODE }}
-
+      
     - name: Deploy to Cloud Foundry
-      run: cf push
+      run: cf push -o msd -s ctaas
