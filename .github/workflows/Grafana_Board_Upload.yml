@@ -32,5 +32,8 @@ jobs:
     - name: Change to grafana-config directory
       run: cd ./grafana-config/
 
+    - name: List contents of the directory
+      run: ls -la
+
     - name: Deploy to Cloud Foundry
       run: cf push dashboard-trends-grafana -f manifest.yml
