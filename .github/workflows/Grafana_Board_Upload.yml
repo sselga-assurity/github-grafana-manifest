@@ -20,4 +20,5 @@ jobs:
           cf api https://api.sys.ap.assurity.cloud
 
       - name: upload grafana board 1
+        run: |
           cf login --sso
