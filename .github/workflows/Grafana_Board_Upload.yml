@@ -31,3 +31,6 @@ jobs:
 
     - name: Deploy to Cloud Foundry
       run: cf push dashboard-trends-grafana
+
+    - name: Check current directory
+      run: pwd
