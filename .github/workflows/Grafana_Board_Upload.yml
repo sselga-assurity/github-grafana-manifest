@@ -23,7 +23,7 @@ jobs:
         
     - name: SSO Login
       run: |
-        cf login --sso -c ${{ secrets.CF_SSO_PASSCODE }}
+        cf login --sso-passcode ${{ secrets.CF_SSO_PASSCODE }}
       
     - name: Deploy to Cloud Foundry
       run: cf push -o msd -s ctaas
