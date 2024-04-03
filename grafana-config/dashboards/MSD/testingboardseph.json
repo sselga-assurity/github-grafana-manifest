@@ -1,0 +1,177 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "b4d59c09-8e12-45e4-9516-a21f516c3daf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 1
+          },
+          "mappings": [
+            {
+              "options": {
+                "failure": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Failure"
+                },
+                "success": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Success"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colWidth": 0.9,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "alias": "$tag_workflow_name",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "b4d59c09-8e12-45e4-9516-a21f516c3daf"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "workflow_name::tag"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "scenario_names",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT distinct(\"conclusion\") FROM \"autogen\".\"workflow_runs\" WHERE (\"workflow_name\" =~/^$workflow_names$/) AND $timeFilter GROUP BY time(24h), \"workflow_name\"::tag fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "conclusion"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "workflow_name::field",
+              "operator": "=~",
+              "value": "/^$workflow_names$/"
+            }
+          ]
+        }
+      ],
+      "title": "Panel Title - Test Seph",
+      "type": "status-history"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "b4d59c09-8e12-45e4-9516-a21f516c3daf"
+        },
+        "definition": "SHOW TAG VALUES ON demo_metrics WITH KEY = \"workflow_name\"",
+        "hide": 0,
+        "includeAll": true,
+        "label": "workflow_names",
+        "multi": true,
+        "name": "workflow_names",
+        "options": [],
+        "query": "SHOW TAG VALUES ON demo_metrics WITH KEY = \"workflow_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-14d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Trends - Seph Test",
+  "uid": "a26b367b-d27e-4bf6-9943-78d7e40621c2",
+  "version": 12,
+  "weekStart": ""
+}

@@ -166,7 +166,7 @@
         "multi": true,
         "name": "names",
         "options": [],
-        "query": "SHOW TAG VALUES ON workflowsdb WITH KEY = \"workflow_name\"",
+        "query": "SHOW TAG VALUES ON      WITH KEY = \"workflow_name\"",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
