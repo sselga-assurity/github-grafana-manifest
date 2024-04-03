@@ -30,6 +30,9 @@ jobs:
       run: |
         cf target -o msd -s ctaas
 
+    - name: Check current directory
+      run: pwd
+
     - name: Deploy to Cloud Foundry
       run: cf push dashboard-trends-grafana
 
