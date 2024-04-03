@@ -1,36 +1,23 @@
-name: upload grafana board
+name: Deploy to Cloud Foundry
+
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # This allows manual triggering of the workflow from the Actions tab
+
 jobs:
-  run-tests:
+  deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up environment
-        run: |
-          # Install Cloud Foundry CLI
-          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-          sudo apt-get update
-          sudo apt-get install cf-cli
-
-      - name: Authenticate with Cloud Foundry
-        run: |
-          cf api https://api.sys.ap.assurity.cloud
-          cf login --sso
-          # Here, you might need to capture and handle the temporary authentication code
-          # You can use 'grep' or other text processing tools to extract it from the output
-          # Once you have the temporary authentication code, you can automate its input
-          cf login --sso -p EAU56Xazwj
-          # Replace "your-temporary-auth-code" with the actual code
-
-      - name: Target Cloud Foundry Org and Space
-        run: |
-          cf target -o msd -s ctaas
-
-      - name: upload grafana board
-        run: |
-          cd ./grafana-config/
-          cf push
+    - name: Set up Cloud Foundry CLI
+      uses: cloudfoundry/cli-action@v2
+      with:
+        cf_api: ${{ secrets.CF_API }}
+        cf_sso: true
+        cf_sso_passcode: ${{ secrets.CF_SSO_PASSCODE }}
+        
+    - name: Deploy to Cloud Foundry
+      run: |
+        cf push -o msd -s ctaas
