@@ -23,7 +23,7 @@ jobs:
         
     - name: SSO Login
       run: |
-        cf login --sso-passcode 4JLcC5UHAl
+        cf login --sso-passcode x16UPFPwAZ
 #        cf login --sso-passcode ${{ secrets.CF_SSO_PASSCODE }}
 
     - name: Target Cloud Foundry Org and Space
