@@ -7,6 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Set up environment
         run: |
           # Install Cloud Foundry CLI
@@ -15,10 +16,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install cf-cli
 
+      - name: Authenticate with Cloud Foundry
+        run: |
+          cf api ${{ secrets.CF_API_ENDPOINT }}
+          cf login --sso
+          # Here, you might need to capture and handle the temporary authentication code
+          # You can use 'grep' or other text processing tools to extract it from the output
+          # Once you have the temporary authentication code, you can automate its input
+          cf login --sso -p EAU56Xazwj
+          # Replace "your-temporary-auth-code" with the actual code
+
+      - name: Target Cloud Foundry Org and Space
+        run: |
+          cf target -o msd -s ctaas
+
       - name: upload grafana board
         run: |
-          cf api https://api.sys.ap.assurity.cloud
-
-      - name: upload grafana board 1
-        run: |
-          cf login --sso
+          cd ./grafana-config/
+          cf push
