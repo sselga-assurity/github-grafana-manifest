@@ -30,4 +30,4 @@ jobs:
         cf target -o msd -s ctaas
       
     - name: Deploy to Cloud Foundry
-      run: cf push
+      run: cf push dashboard-trends-grafana
