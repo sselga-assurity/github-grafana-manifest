@@ -1,0 +1,187 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "eebcfd10-ed84-48c4-b241-1a193a9dbda3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 1
+          },
+          "mappings": [
+            {
+              "options": {
+                "cancelled": {
+                  "color": "#808080",
+                  "index": 2,
+                  "text": "Cancelled"
+                },
+                "failure": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Failure"
+                },
+                "success": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Success"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colWidth": 0.9,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        {
+          "alias": "$tag_workflow_name",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "eebcfd10-ed84-48c4-b241-1a193a9dbda3"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "workflow_name::tag"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "workflow_runs",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT DISTINCT(\"conclusion\") FROM \"autogen\".\"workflow_runs\" WHERE (\"workflow_name\" =~/^$workflow_names$/) AND $timeFilter GROUP BY time(24h), \"workflow_name\"::tag fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "conclusion"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "workflow_name::field",
+              "operator": "=~",
+              "value": "/^$workflow_names$/"
+            }
+          ]
+        }
+      ],
+      "title": "Panel Title",
+      "type": "status-history"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "eebcfd10-ed84-48c4-b241-1a193a9dbda3"
+        },
+        "definition": "SHOW TAG VALUES ON demo_metrics WITH KEY = \"workflow_name\"",
+        "hide": 0,
+        "includeAll": true,
+        "label": "workflow_names",
+        "multi": true,
+        "name": "workflow_names",
+        "options": [],
+        "query": "SHOW TAG VALUES ON demo_metrics WITH KEY = \"workflow_name\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Trends",
+  "uid": "e7d97c6c-64a6-4588-8399-58f6e2b5b7d9",
+  "version": 9,
+  "weekStart": ""
+}
