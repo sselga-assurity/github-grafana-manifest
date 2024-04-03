@@ -7,7 +7,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Set up environment
+        run: |
+          # Install Cloud Foundry CLI
+          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+          sudo apt-get update
+          sudo apt-get install cf-cli
+
       - name: upload grafana board
         run: |
-          cd .\grafana-config\
-          cf push
+          cf api https://api.sys.ap.assurity.cloud
+          # cd ./grafana-config/
+          # Authenticate with Cloud Foundry if necessary
+          # cf login -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
+          # cf push
