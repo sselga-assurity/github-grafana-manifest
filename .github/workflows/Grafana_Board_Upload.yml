@@ -28,6 +28,9 @@ jobs:
     - name: Target Cloud Foundry Org and Space
       run: |
         cf target -o msd -s ctaas
-      
+
+    - name: Change to grafana-config directory
+      run: cd ./grafana-config/
+
     - name: Deploy to Cloud Foundry
       run: cf push dashboard-trends-grafana
