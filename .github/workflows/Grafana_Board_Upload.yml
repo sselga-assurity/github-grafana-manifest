@@ -12,14 +12,21 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Cloud Foundry CLI
-      uses: cloudfoundry/cli-action@v2
+      uses: elliottpope/cloudfoundry-cli-action@v2
       with:
-        cf_api: ${{ secrets.CF_API }}
-        cf_sso: true
-        cf_sso_passcode: ${{ secrets.CF_SSO_PASSCODE }}
+        api: ${{ secrets.CF_API }}
+        organization: msd
+        space: ctaas
         
-    - name: Login to Cloud Foundry
-      run: cf login --sso
-        
+    - name: SSO Login
+      run: |
+        cf login --sso
+
+    - name: Input SSO Temporary Code
+      run: |
+        echo "Please input the SSO temporary code provided by Cloud Foundry: "
+        read sso_temporary_code
+        cf login --sso -c ${{ secrets.CF_SSO_PASSCODE }}
+
     - name: Deploy to Cloud Foundry
-      run: cf push -o msd -s ctaas
+      run: cf push
