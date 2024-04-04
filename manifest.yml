@@ -4,7 +4,7 @@ applications:
     memory: 512M
     instances: 1
     stack: cflinuxfs4
-    path: ./
+    path: ./grafana-config
     routes:
       - route: https://demo-grafana-trends.app.ap.assurity.cloud
     buildpacks:
