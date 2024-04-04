@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: dashboard-trends-grafana
+  - name: seph-dashboard-trends-grafana
     memory: 512M
     instances: 1
     stack: cflinuxfs4
