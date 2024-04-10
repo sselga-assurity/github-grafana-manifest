@@ -12,8 +12,8 @@ jobs:
     
     - name: download cf-cli
       run: |
-        ${{secrets.CF_WORKSPACE}}/steps/download-cf-cli.sh
+        sselga-assurity/github-grafana-manifest/steps/download-cf-cli.sh
 
     - name: deploy dashboard
       run: |
-        ${{secrets.CF_WORKSPACE}}/steps/deploy-app.sh
+        sselga-assurity/github-grafana-manifest/steps/deploy-app.sh
