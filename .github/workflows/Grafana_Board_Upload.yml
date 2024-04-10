@@ -21,11 +21,6 @@ jobs:
         chmod +x /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/download-cf-cli.sh
         /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/download-cf-cli.sh
 
-    - name: download cf-cli (test)
-      run: |
-        sudo apt update
-        sudo apt install cf-cli
-
     - name: deploy dashboard
       run: |
         chmod +x /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/deploy-app.sh
