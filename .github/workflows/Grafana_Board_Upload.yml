@@ -10,8 +10,8 @@ jobs:
     steps:
     - name: download cf-cli
       run: |
-        ${{secrets.GITHUB_WORKSPACE}}/steps/download-cf-cli.sh
+        ${{secrets.CF_WORKSPACE}}/steps/download-cf-cli.sh
 
     - name: deploy dashboard
       run: |
-        ${{secrets.GITHUB_WORKSPACE}}/steps/deploy-app.sh
+        ${{secrets.CF_WORKSPACE}}/steps/deploy-app.sh
