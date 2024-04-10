@@ -3,6 +3,12 @@ name: Deploy to Cloud Foundry
 on:
   workflow_dispatch:  # This allows manual triggering of the workflow from the Actions tab
 
+env:
+  CF_USERNAME: ${{ secrets.CF_USERNAME }}
+  CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+  CF_ORG: ${{ secrets.CF_ORG }}
+  CF_SPACE: ${{ secrets.CF_SPACE }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
