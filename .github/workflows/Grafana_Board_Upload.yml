@@ -8,26 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Install Cloud Foundry CLI
+    - name: download cf-cli
       run: |
-        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-        sudo apt-get update
-        sudo apt-get install cf-cli
-        
-    - name: Set up Cloud Foundry API endpoint
-      run: cf api ${{ secrets.CF_API }}
-        
-    - name: SSO Login
-      run: |
-        cf login -u ${{ secrets.CF_USERNAME }} -p ${{ secrets.CF_PASSWORD }}
+        ${{secrets.GITHUB_WORKSPACE}}/steps/download-cf-cli.sh
 
-    - name: Target Cloud Foundry Org and Space
+    - name: deploy dashboard
       run: |
-        cf target -o msd -s ctaas
-
-    - name: Deploy to Cloud Foundry
-      run: cf push
+        ${{secrets.GITHUB_WORKSPACE}}/steps/deploy-app.sh
