@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: list files
-      run: ls github-grafana-manifest
+    - name: print current dir
+      run: pwd
     
     - name: download cf-cli
       run: |
