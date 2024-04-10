@@ -18,3 +18,4 @@ jobs:
     - name: deploy dashboard
       run: |
         chmod +x /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/deploy-app.sh
+        /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/deploy-app.sh
