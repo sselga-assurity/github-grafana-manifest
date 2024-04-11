@@ -18,7 +18,7 @@ jobs:
     
     - name: download cf-cli
       run: |
-        chmod +x ${GITHUB_WORKSPACE}/steps/deploy-app.sh
+        chmod +x ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
         # chmod +x /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/download-cf-cli.sh
         # /home/runner/work/github-grafana-manifest/github-grafana-manifest/steps/download-cf-cli.sh
 
