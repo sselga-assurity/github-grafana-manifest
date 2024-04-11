@@ -4,6 +4,7 @@ on:
   workflow_dispatch:  # This allows manual triggering of the workflow from the Actions tab
 
 env:
+  CF_API:  ${{ secrets.CF_API }}
   CF_USERNAME: ${{ secrets.CF_USERNAME }}
   CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
   CF_ORG: ${{ secrets.CF_ORG }}
@@ -21,7 +22,7 @@ jobs:
         chmod +x ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
         ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
      
-    - name: deploy dashboard
+    - name: deploy dashboard        
       run: |
         chmod +x ${GITHUB_WORKSPACE}/steps/deploy-app.sh
         ${GITHUB_WORKSPACE}/steps/deploy-app.sh
