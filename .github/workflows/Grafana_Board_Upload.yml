@@ -20,8 +20,9 @@ jobs:
       run: |
         export SAMPLE="fOO"
         export SAMPLE_TWO="Bazz"
-        echo $SAMPLE >> $GITHUB_ENV
-        echo $SAMPLE_TWO >> $GITHUB_ENV
+        echo "SAMPLE=$SAMPLE" >> $GITHUB_ENV
+        echo "SAMPLE_TWO=$SAMPLE_TWO" >> $GITHUB_ENV
+
 
     - name: deploy
       run: |
