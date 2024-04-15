@@ -18,8 +18,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: test jq
       run: |
-        jq --help
-    
+        export CF_ORG="fOO"
+        echo $CF_ORG
+
+    - name: deploy
+      run: |
+        echo $CF_ORG
+
     # - name: download cf-cli
     #   run: |
     #     chmod +x ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
