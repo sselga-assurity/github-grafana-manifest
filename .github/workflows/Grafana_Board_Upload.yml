@@ -18,12 +18,16 @@ jobs:
     - uses: actions/checkout@v2
     - name: test jq
       run: |
-        export CF_ORG="fOO"
-        echo $CF_ORG
+        export SAMPLE_ENV="fOO"
+        export SAMPLE_ENV2="Bazz"
+        echo $SAMPLE_ENV >> $GITHUB_ENV
+        echo $SAMPLE_ENV2 >> $GITHUB_ENV
+        echo $GITHUB_ENV
 
     - name: deploy
       run: |
-        echo $CF_ORG
+        echo $SAMPLE_ENV
+        echo $SAMPLE_ENV2
 
     # - name: download cf-cli
     #   run: |
