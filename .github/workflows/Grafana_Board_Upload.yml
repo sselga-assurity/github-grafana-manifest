@@ -16,13 +16,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: test jq
+      run: |
+        jq --help
     
-    - name: download cf-cli
-      run: |
-        chmod +x ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
-        ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
+    # - name: download cf-cli
+    #   run: |
+    #     chmod +x ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
+    #     ${GITHUB_WORKSPACE}/steps/download-cf-cli.sh
      
-    - name: deploy dashboard        
-      run: |
-        chmod +x ${GITHUB_WORKSPACE}/steps/deploy-app.sh
-        ${GITHUB_WORKSPACE}/steps/deploy-app.sh
+    # - name: deploy dashboard        
+    #   run: |
+    #     chmod +x ${GITHUB_WORKSPACE}/steps/deploy-app.sh
+    #     ${GITHUB_WORKSPACE}/steps/deploy-app.sh
